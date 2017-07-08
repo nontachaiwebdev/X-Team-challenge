@@ -7,6 +7,7 @@ var session = {
   lastMessageHash: process.argv[3]
 }
 
+
 if (!session.username || !session.lastMessageHash) {
   console.log('Usage: node index.js <username> <hash>')
   process.exit(0)
@@ -17,14 +18,15 @@ var dbFile = path.join(__dirname, 'db', 'index.json')
 funcs.loadDb(dbFile, function (err, db) {
 
   // 2. encode the name
-  var encoded = encodeName(session.usrename)
+  var encoded = encodeName(session.username)
 
   // 3. find the user's inbox
   var inbox = funcs.findInbox(db, encoded)
-  // 4. find the next message
-  var nextMessage = funcs.findNextMessage(inbox, session.lastMessageHash)
 
-  // 5. print out the message.
-  // Paste the console output into the "Solution" field and you're done!
-  console.log(nextMessage)
+  // 4. find the next message
+  funcs.findNextMessage(inbox, session.lastMessageHash).then((nextMessage) => {
+    // 5. print out the message.
+    // Paste the console output into the "Solution" field and you're done!
+    console.log(nextMessage)
+  })
 })

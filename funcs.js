@@ -69,12 +69,21 @@ module.exports.findInbox = function (db, encodedName) {
   }
 }
 
+const readFileByHash = (dir, hash) => {
+  return new Promise((resolve, reject) => {
+    fs.readFile(path.join(dir, hash), 'utf8', (err, data) => {
+      if(err) reject(err)
+      resolve(data)
+    })
+  })
+}
+
 /**
  * Find the next message, given the hash of the previous message
  *
  * ({ messages: Array<Object> }, string): string
  */
-module.exports.findNextMessage = function (inbox, lastHash) {
+module.exports.findNextMessage = async function (inbox, lastHash) {
   // find the message which comes after lastHash
   var found
   for (var i = 0; i < inbox.messages.length; i += 1) {
@@ -84,6 +93,6 @@ module.exports.findNextMessage = function (inbox, lastHash) {
     }
   }
   // read and decode the message
-  return 'from: ' + decode(inbox.messages[found].from) + '\n---\n' +
-    decode(fs.readFile(path.join(inbox.dir, inbox.messages[found].hash), 'utf8'))
+  const message = await readFileByHash(inbox.dir, inbox.messages[found].hash)
+  return 'from: ' + decode(inbox.messages[found].from) + '\n---\n' + decode(message)
 }
