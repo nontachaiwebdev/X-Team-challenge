@@ -1,6 +1,6 @@
 var path = require('path')
 var funcs = require('./funcs')
-var encodeName = funcs.encodName
+var encodeName = funcs.encodeName
 
 var session = {
   username: process.argv[2],
@@ -21,7 +21,6 @@ funcs.loadDb(dbFile, function (err, db) {
 
   // 3. find the user's inbox
   var inbox = funcs.findInbox(db, encoded)
-
   // 4. find the next message
   var nextMessage = funcs.findNextMessage(inbox, session.lastMessageHash)
 

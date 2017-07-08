@@ -1,0 +1,19 @@
+{
+  "name": "challenge-01",
+  "version": "1.0.0",
+  "description": "repo for challenge",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nontachaiwebdev/X-Team-challenge.git"
+  },
+  "author": "sutininter@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nontachaiwebdev/X-Team-challenge/issues"
+  },
+  "homepage": "https://github.com/nontachaiwebdev/X-Team-challenge#readme"
+}
